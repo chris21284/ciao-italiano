@@ -16,14 +16,14 @@ pnpm dev
 Le site s'ouvre sur http://localhost:3005 (`pnpm dev --port 3005` est le
 réglage par défaut du projet pour ne pas entrer en conflit avec l'autre site).
 
-| Commande         | Effet                                   |
-| ---------------- | --------------------------------------- |
-| `pnpm dev`       | serveur de développement                |
-| `pnpm build`     | build de production (entièrement static)|
-| `pnpm test`      | tests unitaires (Vitest)                |
-| `pnpm lint`      | ESLint                                  |
-| `pnpm typecheck` | TypeScript                              |
-| `pnpm format`    | Prettier                                |
+| Commande         | Effet                                    |
+| ---------------- | ---------------------------------------- |
+| `pnpm dev`       | serveur de développement                 |
+| `pnpm build`     | build de production (entièrement static) |
+| `pnpm test`      | tests unitaires (Vitest)                 |
+| `pnpm lint`      | ESLint                                   |
+| `pnpm typecheck` | TypeScript                               |
+| `pnpm format`    | Prettier                                 |
 
 ## Comment c'est fait
 
@@ -46,16 +46,16 @@ réglage par défaut du projet pour ne pas entrer en conflit avec l'autre site).
 
 ## La gamification
 
-| Ressort               | Où ça se joue                                                     |
-| --------------------- | ----------------------------------------------------------------- |
-| XP et niveaux         | 10 XP par bonne réponse, +20 pour une leçon sans faute ; niveaux titrés (Curieuse, Apprentie, ... Étoile italienne) |
-| Série quotidienne 🔥  | un jour manqué et la série retombe à zéro — le retour du lendemain |
-| Objectif du jour      | anneau de progression sur 100 XP, visible sur chaque écran         |
-| Étoiles              | 3 étoiles pour un sans-faute, et une leçon rejouée ne fait jamais perdre d'étoiles |
-| Cœurs                | 3 cœurs par leçon : l'erreur coûte quelque chose, sans jamais bloquer (on recommence tout de suite) |
-| Parcours à débloquer  | une seule leçon ouverte à la fois, avec un halo sur la suivante    |
-| Badges                | 12 trophées (premier pas, 10/50/100 mots, séries, unités, 1000 XP...) |
-| Révision              | les mots ratés reviennent dans une séance sans cœurs ni étoiles    |
+| Ressort              | Où ça se joue                                                                                                       |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| XP et niveaux        | 10 XP par bonne réponse, +20 pour une leçon sans faute ; niveaux titrés (Curieuse, Apprentie, ... Étoile italienne) |
+| Série quotidienne 🔥 | un jour manqué et la série retombe à zéro — le retour du lendemain                                                  |
+| Objectif du jour     | anneau de progression sur 100 XP, visible sur chaque écran                                                          |
+| Étoiles              | 3 étoiles pour un sans-faute, et une leçon rejouée ne fait jamais perdre d'étoiles                                  |
+| Cœurs                | 3 cœurs par leçon : l'erreur coûte quelque chose, sans jamais bloquer (on recommence tout de suite)                 |
+| Parcours à débloquer | une seule leçon ouverte à la fois, avec un halo sur la suivante                                                     |
+| Badges               | 12 trophées (premier pas, 10/50/100 mots, séries, unités, 1000 XP...)                                               |
+| Révision             | les mots ratés reviennent dans une séance sans cœurs ni étoiles                                                     |
 
 ## Ajouter à l'écran d'accueil
 
