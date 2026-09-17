@@ -1,0 +1,69 @@
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  background: var(--card);
+  border: 2px solid var(--card-border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.stat {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  gap: 0 4px;
+}
+
+.emoji {
+  font-size: 1.5rem;
+  grid-row: span 2;
+}
+
+.value {
+  font-family: var(--font-baloo), sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.label {
+  font-size: 0.7rem;
+  color: var(--ink-soft);
+  font-weight: 700;
+}
+
+.level {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.levelTitle {
+  font-family: var(--font-baloo), sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gauge {
+  display: block;
+  height: 10px;
+  border-radius: 999px;
+  background: #f0ece3;
+  overflow: hidden;
+}
+
+.gaugeFill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--yellow), var(--green));
+  transition: width 0.4s ease;
+}

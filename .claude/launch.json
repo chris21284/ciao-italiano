@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ciao-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["dev", "--port", "3005"],
+      "port": 3005,
+      "autoPort": false
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  font-size: 1.6rem;
+}
+
+.level {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 20px;
+  background: linear-gradient(140deg, var(--yellow), #ffe9a8);
+  box-shadow: var(--shadow);
+}
+
+.levelNumber {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--card);
+  font-family: var(--font-baloo), sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+
+.levelTitle {
+  font-family: var(--font-baloo), sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.levelXp {
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.stats {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.stat {
+  padding: 14px;
+  border: 2px solid var(--card-border);
+  border-radius: 18px;
+  background: var(--card);
+  text-align: center;
+}
+
+.statValue {
+  display: block;
+  font-family: var(--font-baloo), sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.badgesTitle {
+  font-size: 1.2rem;
+}
+
+.badges {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+@media (min-width: 420px) {
+  .badges {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+  border: 2px solid var(--card-border);
+  border-radius: 18px;
+  background: var(--card);
+  text-align: center;
+}
+
+.badge[data-unlocked='false'] {
+  opacity: 0.6;
+  background: #f7f4ee;
+}
+
+.badgeEmoji {
+  font-size: 2rem;
+}
+
+.badgeLabel {
+  font-family: var(--font-baloo), sans-serif;
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+.badgeHint {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.reset {
+  align-self: center;
+  margin-top: 8px;
+  padding: 10px;
+  border: none;
+  background: none;
+  font-weight: 800;
+  color: var(--ink-soft);
+  text-decoration: underline;
+}

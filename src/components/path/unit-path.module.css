@@ -1,0 +1,134 @@
+.path {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.unit {
+  position: relative;
+}
+
+.unitHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: var(--unit-color);
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+
+.unitEmoji {
+  font-size: 1.8rem;
+}
+
+.unitTitle {
+  font-size: 1.1rem;
+  line-height: 1.2;
+}
+
+.unitSubtitle {
+  font-size: 0.8rem;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.unitCount {
+  margin-left: auto;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.28);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.lessons {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* Le fil qui relie les leçons entre elles, façon chemin. */
+  background: linear-gradient(var(--card-border), var(--card-border)) no-repeat center / 4px 100%;
+  padding-block: 10px;
+}
+
+.lessonRow {
+  display: flex;
+}
+
+.lessonRow[data-side='left'] {
+  justify-content: flex-start;
+}
+
+.lessonRow[data-side='right'] {
+  justify-content: flex-end;
+}
+
+.node {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: min(100%, 300px);
+  padding: 10px 14px;
+  border: 2px solid var(--card-border);
+  border-radius: 18px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.nodeEmoji {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--unit-color);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.nodeLabel {
+  flex: 1;
+  font-family: var(--font-baloo), sans-serif;
+  font-size: 0.98rem;
+  font-weight: 700;
+}
+
+.stars {
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  letter-spacing: 1px;
+}
+
+.done .nodeEmoji {
+  background: var(--green);
+}
+
+.locked {
+  opacity: 0.55;
+}
+
+.locked .nodeEmoji {
+  background: #d7d7de;
+}
+
+/* La prochaine leçon respire pour attirer l'œil dès l'ouverture du site. */
+.next {
+  border-color: var(--green);
+  animation: pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}

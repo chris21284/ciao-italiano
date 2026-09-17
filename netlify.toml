@@ -1,0 +1,10 @@
+# Déploiement Netlify, comme Le Citron Super Pressé. Le site n'a ni base de
+# données ni variable d'environnement : tout le contenu est dans le code et
+# toute la progression dans le navigateur de l'enfant.
+
+[build]
+  command = "pnpm build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

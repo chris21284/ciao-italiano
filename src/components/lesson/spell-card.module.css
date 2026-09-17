@@ -1,0 +1,79 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.question {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--ink-soft);
+}
+
+.prompt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border: 2px solid var(--card-border);
+  border-radius: 20px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.promptEmoji {
+  font-size: 2.4rem;
+}
+
+.promptWord {
+  font-family: var(--font-baloo), sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.slot {
+  min-height: 56px;
+  display: grid;
+  place-items: center;
+  padding: 10px;
+  border: 2px dashed var(--card-border);
+  border-radius: 16px;
+  font-family: var(--font-baloo), sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.placeholder {
+  font-family: var(--font-nunito), sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--ink-soft);
+}
+
+.letters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.letter {
+  min-width: 48px;
+  min-height: 52px;
+  padding: 8px 12px;
+  border: 2px solid var(--card-border);
+  border-radius: 14px;
+  background: var(--card);
+  font-family: var(--font-baloo), sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  box-shadow: 0 3px 0 var(--card-border);
+}
+
+.letter[data-used='true'] {
+  opacity: 0.35;
+  box-shadow: none;
+  transform: translateY(3px);
+}

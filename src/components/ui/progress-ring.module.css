@@ -1,0 +1,21 @@
+.ring {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: conic-gradient(var(--green) var(--ratio), #f0ece3 0);
+  transition: background 0.4s ease;
+}
+
+.inner {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--card);
+  font-size: 0.72rem;
+  font-weight: 800;
+}

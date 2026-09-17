@@ -1,0 +1,6 @@
+.loading {
+  padding: 80px 20px;
+  text-align: center;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
