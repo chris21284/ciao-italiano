@@ -4,7 +4,7 @@
     {
       "name": "ciao-dev",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["dev", "--port", "3005"],
+      "runtimeArgs": ["dev"],
       "port": 3005,
       "autoPort": false
     }

@@ -13,8 +13,8 @@ pnpm install
 pnpm dev
 ```
 
-Le site s'ouvre sur http://localhost:3005 (`pnpm dev --port 3005` est le
-réglage par défaut du projet pour ne pas entrer en conflit avec l'autre site).
+Le site s'ouvre sur http://localhost:3005 (le script `dev` fixe ce port, pour
+ne pas entrer en conflit avec le Citron Pressé sur le 3000).
 
 | Commande         | Effet                                    |
 | ---------------- | ---------------------------------------- |
