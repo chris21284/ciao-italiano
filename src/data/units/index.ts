@@ -4,6 +4,8 @@ import { corpsEtMaison } from './corps-et-maison';
 import { mondeAutour } from './monde-autour';
 import { nombresEtTemps } from './nombres-et-temps';
 import { motsPourDire } from './mots-pour-dire';
+import { ecoleEtMetiers } from './ecole-et-metiers';
+import { vitaItaliana } from './vita-italiana';
 import { verbUnits } from './verbes';
 
 /**
@@ -18,6 +20,8 @@ export const units: Unit[] = [
   ...mondeAutour,
   ...nombresEtTemps,
   ...motsPourDire,
+  ...ecoleEtMetiers,
+  ...vitaItaliana,
   ...verbUnits,
 ];
 

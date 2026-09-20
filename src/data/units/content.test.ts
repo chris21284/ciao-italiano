@@ -9,9 +9,11 @@ import { allLessons, allWords, units } from './index';
  */
 describe('contenu du parcours', () => {
   it('tient au moins trois mois de séances quotidiennes', () => {
-    expect(units.length).toBeGreaterThanOrEqual(30);
-    expect(allLessons.length).toBeGreaterThanOrEqual(110);
-    expect(allWords.length).toBeGreaterThanOrEqual(700);
+    // Deux à trois leçons par jour au début, moins ensuite quand les
+    // révisions prennent leur place : il en faut de quoi tenir ~90 jours.
+    expect(units.length).toBeGreaterThanOrEqual(40);
+    expect(allLessons.length).toBeGreaterThanOrEqual(155);
+    expect(allWords.length).toBeGreaterThanOrEqual(950);
   });
 
   it('n’a aucun identifiant de mot en double', () => {
@@ -43,7 +45,7 @@ describe('contenu du parcours', () => {
 
   it('accompagne chaque forme conjuguée de son infinitif et de son pronom', () => {
     const conjugated = allWords.filter((word) => word.verb);
-    expect(conjugated.length).toBeGreaterThanOrEqual(100);
+    expect(conjugated.length).toBeGreaterThanOrEqual(130);
     for (const word of conjugated) {
       expect(word.it, word.id).toBe(`${word.verb?.pronoun} ${word.verb?.form}`);
       expect(word.verb?.infinitive.length, word.id).toBeGreaterThan(0);

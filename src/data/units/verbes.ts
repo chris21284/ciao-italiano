@@ -304,6 +304,66 @@ const sapere: VerbTable = {
   ],
 };
 
+const essereFuturo: VerbTable = {
+  id: 'essere-futuro',
+  infinitive: 'essere (futuro)',
+  fr: 'être, plus tard',
+  emoji: '🔮',
+  forms: [
+    { pronoun: 'io', form: 'sarò', fr: 'je serai', say: 'io sa-ro' },
+    { pronoun: 'tu', form: 'sarai', fr: 'tu seras', say: 'tou sa-raï' },
+    { pronoun: 'lui', form: 'sarà', fr: 'il sera', say: 'louï sa-ra' },
+    { pronoun: 'noi', form: 'saremo', fr: 'nous serons', say: 'noï sa-ré-mo' },
+    { pronoun: 'voi', form: 'sarete', fr: 'vous serez', say: 'voï sa-ré-té' },
+    { pronoun: 'loro', form: 'saranno', fr: 'ils seront', say: 'lo-ro sa-ran-no' },
+  ],
+};
+
+const avereFuturo: VerbTable = {
+  id: 'avere-futuro',
+  infinitive: 'avere (futuro)',
+  fr: 'avoir, plus tard',
+  emoji: '🔮',
+  forms: [
+    { pronoun: 'io', form: 'avrò', fr: "j'aurai", say: 'io a-vro' },
+    { pronoun: 'tu', form: 'avrai', fr: 'tu auras', say: 'tou a-vraï' },
+    { pronoun: 'lui', form: 'avrà', fr: 'il aura', say: 'louï a-vra' },
+    { pronoun: 'noi', form: 'avremo', fr: 'nous aurons', say: 'noï a-vré-mo' },
+    { pronoun: 'voi', form: 'avrete', fr: 'vous aurez', say: 'voï a-vré-té' },
+    { pronoun: 'loro', form: 'avranno', fr: 'ils auront', say: 'lo-ro a-vran-no' },
+  ],
+};
+
+const andareFuturo: VerbTable = {
+  id: 'andare-futuro',
+  infinitive: 'andare (futuro)',
+  fr: 'aller, plus tard',
+  emoji: '🛫',
+  forms: [
+    { pronoun: 'io', form: 'andrò', fr: "j'irai", say: 'io an-dro' },
+    { pronoun: 'tu', form: 'andrai', fr: 'tu iras', say: 'tou an-draï' },
+    { pronoun: 'lui', form: 'andrà', fr: 'il ira', say: 'louï an-dra' },
+    { pronoun: 'noi', form: 'andremo', fr: 'nous irons', say: 'noï an-dré-mo' },
+    { pronoun: 'voi', form: 'andrete', fr: 'vous irez', say: 'voï an-dré-té' },
+    { pronoun: 'loro', form: 'andranno', fr: 'ils iront', say: 'lo-ro an-dran-no' },
+  ],
+};
+
+const fareFuturo: VerbTable = {
+  id: 'fare-futuro',
+  infinitive: 'fare (futuro)',
+  fr: 'faire, plus tard',
+  emoji: '🛠️',
+  forms: [
+    { pronoun: 'io', form: 'farò', fr: 'je ferai', say: 'io fa-ro' },
+    { pronoun: 'tu', form: 'farai', fr: 'tu feras', say: 'tou fa-raï' },
+    { pronoun: 'lui', form: 'farà', fr: 'il fera', say: 'louï fa-ra' },
+    { pronoun: 'noi', form: 'faremo', fr: 'nous ferons', say: 'noï fa-ré-mo' },
+    { pronoun: 'voi', form: 'farete', fr: 'vous ferez', say: 'voï fa-ré-té' },
+    { pronoun: 'loro', form: 'faranno', fr: 'ils feront', say: 'lo-ro fa-ran-no' },
+  ],
+};
+
 /** Sixième chapitre : la conjugaison, puis le passé. */
 export const verbUnits: Unit[] = [
   {
@@ -542,6 +602,19 @@ export const verbUnits: Unit[] = [
           { id: 'alla-fine', it: 'alla fine', fr: 'à la fin', emoji: '🏁', say: 'al-la fi-né' },
         ],
       },
+    ],
+  },
+  {
+    id: 'futuro',
+    title: 'Il futuro',
+    subtitle: 'Dire ce qu’on fera',
+    emoji: '🔮',
+    color: '#5e60ce',
+    lessons: [
+      verbLesson(essereFuturo),
+      verbLesson(avereFuturo),
+      verbLesson(andareFuturo),
+      verbLesson(fareFuturo),
     ],
   },
 ];

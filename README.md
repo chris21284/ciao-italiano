@@ -34,9 +34,9 @@ ne pas entrer en conflit avec le Citron Pressé sur le 3000).
   externe (`src/lib/progress-store.ts`) branché sur `useSyncExternalStore`,
   exactement comme le panier du Citron Pressé. Rien à administrer, rien à
   héberger, et pas de données d'enfant qui circulent.
-- **Le contenu est du code.** `src/data/units/` contient 32 unités, 121 leçons
-  et 726 mots (avec emoji et prononciation « à la française »), dont 108 formes
-  conjuguées écrites sous forme de tableaux de verbes. Pour enrichir le site,
+- **Le contenu est du code.** `src/data/units/` contient 42 unités, 161 leçons
+  et 966 mots (avec emoji et prononciation « à la française »), dont 132 formes
+  conjuguées (présent et futur) écrites sous forme de tableaux de verbes. Pour enrichir le site,
   on ajoute des entrées : le parcours, les statistiques et les badges suivent
   tout seuls, et `content.test.ts` refuse les doublons d'identifiants.
 - **Les exercices sont générés.** `src/lib/exercise-builder.ts` fabrique, à
