@@ -8,6 +8,9 @@ React, TypeScript strict, CSS Modules, Vitest, pnpm. Le site est exporté en
 fichiers statiques et hébergé par GitHub Pages sur
 [japprends-litalien.fr](https://japprends-litalien.fr).
 
+Pour refaire un site du même genre (autre langue, autre matière), tout le
+mode d'emploi est dans [BLUEPRINT.md](BLUEPRINT.md).
+
 ## Démarrer
 
 ```bash
