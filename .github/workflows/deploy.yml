@@ -1,0 +1,62 @@
+# Publication du site sur GitHub Pages à chaque poussée sur `main`.
+# Le domaine japprends-litalien.fr est déclaré dans `public/CNAME`, que
+# `next build` recopie dans `out/` : Pages le relit à chaque déploiement, le
+# domaine personnalisé n'est donc jamais perdu.
+name: Déploiement GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un déploiement à la fois, sans annuler celui déjà en cours.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # Le site ne part en ligne que si les vérifications passent.
+      - run: pnpm typecheck
+      - run: pnpm lint
+      - run: pnpm test
+
+      - run: pnpm build
+
+      # Sans ce fichier, GitHub Pages passe la sortie dans Jekyll, qui ignore
+      # les dossiers commençant par un souligné — donc tout `_next/`.
+      - run: touch out/.nojekyll
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

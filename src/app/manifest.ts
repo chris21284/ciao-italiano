@@ -1,5 +1,9 @@
 import type { MetadataRoute } from 'next';
 
+// Exigé par `output: 'export'` : le manifeste est un fichier écrit au
+// build, pas une réponse calculée à chaque requête.
+export const dynamic = 'force-static';
+
 /** Le site s'ajoute à l'écran d'accueil du téléphone et s'ouvre alors comme
  *  une application, sans barre d'adresse. */
 export default function manifest(): MetadataRoute.Manifest {

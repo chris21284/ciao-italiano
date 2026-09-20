@@ -4,7 +4,9 @@ Petit site d'apprentissage de l'italien pour une enfant de 9 ans, pensé pour
 être utilisé au doigt, sur un téléphone.
 
 Même base technique que `le-citron-presse/next-app` : Next.js (App Router),
-React, TypeScript strict, CSS Modules, Vitest, pnpm, déploiement Netlify.
+React, TypeScript strict, CSS Modules, Vitest, pnpm. Le site est exporté en
+fichiers statiques et hébergé par GitHub Pages sur
+[japprends-litalien.fr](https://japprends-litalien.fr).
 
 ## Démarrer
 
@@ -62,3 +64,21 @@ ne pas entrer en conflit avec le Citron Pressé sur le 3000).
 Le site est installable (`manifest.webmanifest`) : depuis Safari ou Chrome sur
 le téléphone, « Ajouter à l'écran d'accueil » l'ouvre ensuite comme une
 application, sans barre d'adresse.
+
+## Déploiement
+
+`next.config.ts` active `output: 'export'` : `pnpm build` écrit tout le site
+dans `out/`, sans aucune partie serveur. Le workflow
+[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) rejoue le
+typecheck, le lint et les tests, puis publie `out/` sur GitHub Pages à chaque
+poussée sur `main`.
+
+Pour relire le site exporté exactement comme Pages le servira :
+
+```bash
+pnpm build && python3 -m http.server 3006 --directory out
+```
+
+Le domaine est déclaré dans `public/CNAME` (recopié dans `out/` au build), et
+la zone DNS chez Amen pointe l'apex vers les quatre adresses de GitHub Pages,
+plus un CNAME `www` vers `chris21284.github.io`.
