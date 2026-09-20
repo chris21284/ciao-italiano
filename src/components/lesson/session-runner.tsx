@@ -174,6 +174,12 @@ export function SessionRunner({
           <p className={styles.feedbackSay}>
             {exercise.word.it} — on dit « {exercise.word.say} »
           </p>
+          {/* Sur une question d'écoute, les réponses sont toutes en italien :
+              sans cette ligne, on peut reconnaître le son sans jamais savoir
+              ce que le mot veut dire. */}
+          {exercise.kind === 'listen' && (
+            <p className={styles.feedbackMeaning}>Ça veut dire : {exercise.word.fr}</p>
+          )}
           <button type="button" className="bigButton" onClick={handleContinue}>
             Continuer
           </button>

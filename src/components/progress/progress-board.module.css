@@ -123,6 +123,16 @@
   color: var(--ink-soft);
 }
 
+.rename {
+  align-self: flex-start;
+  padding: 0;
+  border: none;
+  background: none;
+  font-weight: 800;
+  color: var(--blue);
+  text-decoration: underline;
+}
+
 .reset {
   align-self: center;
   margin-top: 8px;

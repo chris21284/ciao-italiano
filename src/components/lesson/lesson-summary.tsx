@@ -2,6 +2,8 @@
 
 import Link from 'next/link';
 import { findBadge } from '@/data/badges';
+import { useProgress } from '@/hooks/use-progress';
+import { useMounted } from '@/hooks/use-mounted';
 import type { LessonReward } from '@/lib/progress-store';
 import { DAILY_GOAL_XP } from '@/lib/xp';
 import styles from './lesson-summary.module.css';
@@ -15,6 +17,10 @@ interface LessonSummaryProps {
 
 /** Écran de récompense : c'est lui qui donne envie de relancer une leçon. */
 export function LessonSummary({ reward, nextLessonId, onReplay }: LessonSummaryProps) {
+  const progress = useProgress();
+  const mounted = useMounted();
+  const name = mounted ? progress.name : null;
+
   return (
     <div className={styles.summary}>
       <div className={styles.confetti} aria-hidden="true">
@@ -23,7 +29,10 @@ export function LessonSummary({ reward, nextLessonId, onReplay }: LessonSummaryP
         ))}
       </div>
 
-      <h1 className={styles.title}>{reward.stars === 3 ? 'Perfetto ! 💎' : 'Bravissima ! 🎉'}</h1>
+      <h1 className={styles.title}>
+        {reward.stars === 3 ? 'Perfetto' : 'Bravissima'}
+        {name ? `, ${name}` : ''} ! {reward.stars === 3 ? '💎' : '🎉'}
+      </h1>
 
       <p className={styles.stars} aria-label={`${reward.stars} étoiles sur 3`}>
         {Array.from({ length: 3 }, (_, index) => (

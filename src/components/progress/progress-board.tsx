@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { badges } from '@/data/badges';
 import { allLessons, allWords } from '@/data/units';
 import { useProgress } from '@/hooks/use-progress';
@@ -7,6 +8,7 @@ import { useMounted } from '@/hooks/use-mounted';
 import { computeStats, EMPTY_PROGRESS } from '@/lib/progress-stats';
 import { resetProgress } from '@/lib/progress-store';
 import { levelProgress } from '@/lib/xp';
+import { NameForm } from '@/components/home/name-form';
 import styles from './progress-board.module.css';
 
 /** Tableau des trophées : ce qu'on vient regarder quand on est fière. */
@@ -17,10 +19,23 @@ export function ProgressBoard() {
   const stats = computeStats(progress);
   const level = levelProgress(stats.xp);
   const earned = badges.filter((badge) => progress.badges.includes(badge.id)).length;
+  const [editingName, setEditingName] = useState(false);
 
   return (
     <section className={styles.section}>
-      <h1 className={styles.title}>🏆 Mes progrès</h1>
+      <h1 className={styles.title}>🏆 Mes progrès{progress.name ? ` — ${progress.name}` : ''}</h1>
+
+      {editingName ? (
+        <NameForm
+          initialName={progress.name ?? ''}
+          submitLabel="Enregistrer"
+          onDone={() => setEditingName(false)}
+        />
+      ) : (
+        <button type="button" className={styles.rename} onClick={() => setEditingName(true)}>
+          Changer de prénom
+        </button>
+      )}
 
       <div className={styles.level}>
         <span className={styles.levelNumber}>{level.level}</span>

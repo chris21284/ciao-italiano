@@ -78,10 +78,22 @@
 }
 
 .feedbackSay {
-  margin-bottom: 12px;
   font-size: 0.85rem;
   font-weight: 700;
   color: var(--ink-soft);
+}
+
+/* Sens du mot sur les questions d'écoute : plus lisible que la prononciation,
+   c'est l'information qui manquait pour apprendre en écoutant. */
+.feedbackMeaning {
+  margin-top: 2px;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.feedbackSay:last-of-type,
+.feedbackMeaning {
+  margin-bottom: 12px;
 }
 
 .bad .bigButton,

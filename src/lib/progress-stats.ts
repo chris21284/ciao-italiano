@@ -5,6 +5,7 @@ import { badges } from '@/data/badges';
 import { currentStreak, dayKey } from './day';
 
 export const EMPTY_PROGRESS: Progress = {
+  name: null,
   xp: 0,
   streak: 0,
   lastDay: null,

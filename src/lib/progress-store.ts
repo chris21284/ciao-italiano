@@ -143,6 +143,16 @@ export function recordReview(rightWordIds: string[], wrongWordIds: string[]) {
   return { xpGained };
 }
 
+/** Longueur retenue pour le prénom : de quoi écrire un prénom ou un surnom,
+ *  pas un roman — l'accueil doit tenir sur une ligne de téléphone. */
+const MAX_NAME_LENGTH = 16;
+
+/** Prénom affiché sur l'accueil et les écrans de fin de leçon. */
+export function setPlayerName(name: string) {
+  const trimmed = name.trim().slice(0, MAX_NAME_LENGTH);
+  commit({ ...state, name: trimmed.length > 0 ? trimmed : null });
+}
+
 export function resetProgress() {
   commit(EMPTY_PROGRESS);
 }

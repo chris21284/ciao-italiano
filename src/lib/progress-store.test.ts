@@ -1,5 +1,11 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { completeLesson, getSnapshot, recordReview, resetProgress } from './progress-store';
+import {
+  completeLesson,
+  getSnapshot,
+  recordReview,
+  resetProgress,
+  setPlayerName,
+} from './progress-store';
 import { DAILY_GOAL_XP, XP_PER_CORRECT, XP_PERFECT_BONUS } from './xp';
 
 beforeEach(() => {
@@ -81,5 +87,29 @@ describe('recordReview', () => {
     recordReview(['ciao'], ['grazie']);
 
     expect(getSnapshot().toReview).toEqual(['grazie']);
+  });
+});
+
+describe('setPlayerName', () => {
+  it('enregistre le prénom sans les espaces en trop', () => {
+    setPlayerName('  Lucie  ');
+    expect(getSnapshot().name).toBe('Lucie');
+  });
+
+  it('tronque un prénom trop long pour la carte d’accueil', () => {
+    setPlayerName('Anne-Charlotte-Émilie');
+    expect(getSnapshot().name).toHaveLength(16);
+  });
+
+  it('revient à l’anonymat sur une saisie vide', () => {
+    setPlayerName('Lucie');
+    setPlayerName('   ');
+    expect(getSnapshot().name).toBeNull();
+  });
+
+  it('survit à une leçon terminée', () => {
+    setPlayerName('Lucie');
+    completeLesson({ lessonId: 'saluti-1', rightWordIds: ['ciao'], wrongWordIds: [] });
+    expect(getSnapshot().name).toBe('Lucie');
   });
 });

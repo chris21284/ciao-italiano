@@ -7,6 +7,8 @@ export interface LessonResult {
 }
 
 export interface Progress {
+  /** Prénom choisi au premier lancement, `null` tant qu'il n'est pas saisi. */
+  name: string | null;
   xp: number;
   /** Nombre de jours d'affilée avec au moins une leçon terminée. */
   streak: number;

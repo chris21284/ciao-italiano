@@ -1,6 +1,6 @@
 # Ciao! — apprendre l'italien en jouant
 
-Petit site d'apprentissage de l'italien pour une enfant de 9 ans, pensé pour
+Petit site d'apprentissage de l'italien pour une enfant de 10 ans, pensé pour
 être utilisé au doigt, sur un téléphone.
 
 Même base technique que `le-citron-presse/next-app` : Next.js (App Router),
