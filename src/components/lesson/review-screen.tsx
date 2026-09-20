@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { allWords, findWord } from '@/data/units';
 import { buildReviewExercises } from '@/lib/exercise-builder';
 import { getSnapshot, recordReview } from '@/lib/progress-store';
-import { learnedWordIds } from '@/lib/progress-stats';
+import { dueToday, learnedWordIds } from '@/lib/progress-stats';
 import { useSessionSeed } from '@/hooks/use-session-seed';
 import { SessionRunner, type SessionResult } from './session-runner';
 import styles from './review-screen.module.css';
@@ -24,15 +24,20 @@ export function ReviewScreen() {
     // tirée une fois pour toutes, sinon la moindre réponse enregistrée en
     // changerait les questions en plein milieu.
     const progress = getSnapshot();
-    const toReview = progress.toReview.map(findWord).filter((word) => word !== undefined);
+    const due = dueToday(progress)
+      .map(findWord)
+      .filter((word) => word !== undefined);
     const learned = new Set(learnedWordIds(progress));
     const seen = allWords.filter((word) => learned.has(word.id));
+    // La séance s'adapte : au moins dix questions, et jusqu'à vingt quand les
+    // révisions se sont accumulées.
+    const size = Math.min(Math.max(due.length, 10), 20);
     // Sans leçon terminée, on révise quand même sur les tout premiers mots.
-    return buildReviewExercises(toReview, seen.length > 0 ? seen : allWords.slice(0, 12), seed);
+    return buildReviewExercises(due, seen.length > 0 ? seen : allWords.slice(0, 12), seed, size);
   }, [seed]);
 
   function handleFinish(result: SessionResult) {
-    const { xpGained: gained } = recordReview(result.rightWordIds, result.wrongWordIds);
+    const { xpGained: gained } = recordReview(result);
     setXpGained(gained);
   }
 

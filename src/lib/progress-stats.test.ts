@@ -53,6 +53,14 @@ describe('computeStats', () => {
     );
   });
 
+  it('compte les mots bien ancrés', () => {
+    const progress = {
+      ...EMPTY_PROGRESS,
+      review: { a: { box: 5, due: '2026-06-01' }, b: { box: 1, due: '2026-05-11' } },
+    };
+    expect(computeStats(progress, '2026-05-10').masteredWords).toBe(1);
+  });
+
   it('ignore une série abandonnée depuis plusieurs jours', () => {
     const progress = { ...EMPTY_PROGRESS, streak: 6, lastDay: '2026-05-01' };
     expect(computeStats(progress, '2026-05-10').streak).toBe(0);

@@ -8,6 +8,16 @@ export interface Word {
   emoji: string;
   /** Aide de prononciation « à la française », affichée après la réponse. */
   say: string;
+  /**
+   * Renseigné sur une forme conjuguée : de quoi demander « io + essere → ? »
+   * sans que l'exercice ait à retrouver le tableau du verbe.
+   */
+  verb?: {
+    infinitive: string;
+    pronoun: string;
+    /** La forme seule, sans le pronom : « sono » dans « io sono ». */
+    form: string;
+  };
 }
 
 export interface Lesson {

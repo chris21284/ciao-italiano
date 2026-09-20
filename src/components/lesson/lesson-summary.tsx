@@ -5,7 +5,7 @@ import { findBadge } from '@/data/badges';
 import { useProgress } from '@/hooks/use-progress';
 import { useMounted } from '@/hooks/use-mounted';
 import type { LessonReward } from '@/lib/progress-store';
-import { DAILY_GOAL_XP } from '@/lib/xp';
+import { DAILY_GOAL_SECONDS, minutesFromSeconds } from '@/lib/daily';
 import styles from './lesson-summary.module.css';
 
 interface LessonSummaryProps {
@@ -58,13 +58,17 @@ export function LessonSummary({ reward, nextLessonId, onReplay }: LessonSummaryP
         </li>
         <li className={styles.card}>
           <span className={styles.cardValue}>
-            {Math.min(reward.xpToday, DAILY_GOAL_XP)}/{DAILY_GOAL_XP}
+            {minutesFromSeconds(reward.secondsToday)}/{minutesFromSeconds(DAILY_GOAL_SECONDS)}′
           </span>
-          <span className={styles.cardLabel}>objectif du jour</span>
+          <span className={styles.cardLabel}>séance du jour</span>
         </li>
       </ul>
 
-      {reward.goalReached && <p className={styles.goal}>🎯 Objectif du jour atteint !</p>}
+      {reward.goalReached && (
+        <p className={styles.goal}>
+          🎯 Séance du jour terminée ! Tu peux t’arrêter là, c’est déjà très bien.
+        </p>
+      )}
 
       {reward.newBadges.length > 0 && (
         <div className={styles.badges}>

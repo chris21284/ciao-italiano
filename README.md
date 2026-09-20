@@ -34,14 +34,25 @@ ne pas entrer en conflit avec le Citron Pressé sur le 3000).
   externe (`src/lib/progress-store.ts`) branché sur `useSyncExternalStore`,
   exactement comme le panier du Citron Pressé. Rien à administrer, rien à
   héberger, et pas de données d'enfant qui circulent.
-- **Le contenu est du code.** `src/data/units.ts` contient les 7 unités, leurs
-  21 leçons et leurs 126 mots (avec emoji et prononciation « à la française »).
-  Pour enrichir le site, on ajoute des entrées dans ce fichier : le parcours,
-  les statistiques et les badges suivent tout seuls.
+- **Le contenu est du code.** `src/data/units/` contient 32 unités, 121 leçons
+  et 726 mots (avec emoji et prononciation « à la française »), dont 108 formes
+  conjuguées écrites sous forme de tableaux de verbes. Pour enrichir le site,
+  on ajoute des entrées : le parcours, les statistiques et les badges suivent
+  tout seuls, et `content.test.ts` refuse les doublons d'identifiants.
 - **Les exercices sont générés.** `src/lib/exercise-builder.ts` fabrique, à
-  partir des mots d'une leçon, quatre types de questions (italien → français,
-  français → italien, écoute, mot à reconstruire lettre par lettre). Le tirage
-  est déterministe à graine égale, donc testable.
+  partir des mots d'une leçon, cinq types de questions (italien → français,
+  français → italien, écoute, mot à reconstruire lettre par lettre, et
+  conjugaison à compléter). Le tirage est déterministe à graine égale, donc
+  testable.
+- **La répétition espacée étale le parcours.** Chaque mot a une fiche (boîtes
+  de Leitner, `src/lib/review-schedule.ts`) : une réussite le repousse à 1, 2,
+  4, 8, 16 puis 32 jours, une erreur le ramène au lendemain. La révision du
+  jour sert ces fiches-là, pas une liste figée.
+- **La séance s'arrête toute seule.** Le temps réellement passé à répondre est
+  compté question par question (45 s maximum par question, pour ne pas compter
+  un téléphone posé). À douze minutes, l'accueil annonce la fin de la séance et
+  invite à revenir demain — un lien « Encore un peu ? » reste là pour les jours
+  d'envie.
 - **La voix est celle du téléphone.** La prononciation passe par la synthèse
   vocale du navigateur en `it-IT` (`src/lib/speak.ts`) : aucun fichier audio à
   héberger.

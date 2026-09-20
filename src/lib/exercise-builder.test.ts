@@ -69,3 +69,37 @@ describe('buildReviewExercises', () => {
     expect(buildReviewExercises([], seen, 1, 10)).toHaveLength(4);
   });
 });
+
+describe('exercices de conjugaison', () => {
+  const verbLesson = findLesson('verbo-essere');
+
+  it('interroge les formes conjuguées avec l’infinitif et le pronom', () => {
+    const exercises = buildLessonExercises(verbLesson?.words ?? [], allWords, 11);
+    const conjugations = exercises.filter((exercise) => exercise.kind === 'conjugate');
+    expect(conjugations.length).toBeGreaterThan(0);
+
+    for (const exercise of conjugations) {
+      expect(exercise.word.verb?.infinitive).toBe('essere');
+      expect(exercise.options).toContain(exercise.word.verb?.form);
+    }
+  });
+
+  it('pioche ses pièges parmi les autres formes du même verbe', () => {
+    const exercises = buildLessonExercises(verbLesson?.words ?? [], allWords, 4);
+    const forms = new Set((verbLesson?.words ?? []).map((word) => word.verb?.form));
+
+    for (const exercise of exercises) {
+      if (exercise.kind !== 'conjugate') continue;
+      for (const option of exercise.options) {
+        expect(forms, option).toContain(option);
+      }
+    }
+  });
+
+  it('ne mélange jamais les lettres d’une forme conjuguée', () => {
+    for (const seed of [1, 2, 3, 4, 5]) {
+      const exercises = buildLessonExercises(verbLesson?.words ?? [], allWords, seed);
+      expect(exercises.some((exercise) => exercise.kind === 'spell')).toBe(false);
+    }
+  });
+});

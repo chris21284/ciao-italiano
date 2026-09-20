@@ -9,7 +9,9 @@ export type Exercise =
   /** On écoute le mot (voix du téléphone) puis on choisit ce qu'on a entendu. */
   | { kind: 'listen'; word: Word; options: string[] }
   /** On reconstruit le mot italien lettre par lettre. */
-  | { kind: 'spell'; word: Word; letters: string[] };
+  | { kind: 'spell'; word: Word; letters: string[] }
+  /** On complète « io ___ » à partir de l'infinitif : la conjugaison. */
+  | { kind: 'conjugate'; word: Word; options: string[] };
 
 const CHOICE_COUNT = 4;
 
@@ -56,6 +58,26 @@ function buildSpell(word: Word, random: () => number): Exercise {
   return { kind: 'spell', word, letters: scrambled };
 }
 
+/**
+ * Pour une forme conjuguée, les meilleurs pièges sont les autres formes du
+ * même verbe : c'est exactement la confusion qu'on veut faire travailler.
+ */
+function buildConjugate(word: Word, pool: readonly Word[], random: () => number): Exercise {
+  const siblings = pool.filter(
+    (other) =>
+      other.verb?.infinitive === word.verb?.infinitive && other.verb?.form !== word.verb?.form,
+  );
+  const others = shuffle(siblings, random)
+    .map((other) => other.verb?.form as string)
+    .filter((form, index, list) => list.indexOf(form) === index)
+    .slice(0, CHOICE_COUNT - 1);
+  return {
+    kind: 'conjugate',
+    word,
+    options: shuffle([word.verb?.form as string, ...others], random),
+  };
+}
+
 function buildOne(
   word: Word,
   index: number,
@@ -64,8 +86,11 @@ function buildOne(
 ): Exercise {
   const rotation = index % 4;
   if (rotation === 0) return buildChoice('choice-it-fr', word, pool, random);
-  if (rotation === 1) return buildChoice('choice-fr-it', word, pool, random);
   if (rotation === 2) return buildChoice('listen', word, pool, random);
+  // Les formes conjuguées passent par l'exercice de conjugaison plutôt que par
+  // les lettres mélangées, qui n'apprendraient rien de la terminaison.
+  if (word.verb) return buildConjugate(word, pool, random);
+  if (rotation === 1) return buildChoice('choice-fr-it', word, pool, random);
   return canSpell(word)
     ? buildSpell(word, random)
     : buildChoice('choice-fr-it', word, pool, random);

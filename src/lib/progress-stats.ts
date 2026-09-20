@@ -3,6 +3,7 @@ import type { BadgeStats } from '@/data/badges';
 import { allLessons, units } from '@/data/units';
 import { badges } from '@/data/badges';
 import { currentStreak, dayKey } from './day';
+import { dueWordIds, masteredCount } from './review-schedule';
 
 export const EMPTY_PROGRESS: Progress = {
   name: null,
@@ -10,8 +11,9 @@ export const EMPTY_PROGRESS: Progress = {
   streak: 0,
   lastDay: null,
   xpToday: 0,
+  secondsToday: 0,
   lessons: {},
-  toReview: [],
+  review: {},
   badges: [],
 };
 
@@ -44,6 +46,7 @@ export function learnedWordIds(progress: Progress): string[] {
 export function computeStats(progress: Progress, today = dayKey()): BadgeStats {
   const results = Object.values(progress.lessons);
   return {
+    masteredWords: masteredCount(progress.review),
     xp: progress.xp,
     streak: currentStreak(progress.streak, progress.lastDay, today),
     lessonsDone: results.length,
@@ -61,4 +64,9 @@ export function newlyEarnedBadges(progress: Progress, today = dayKey()): string[
   return badges
     .filter((badge) => !progress.badges.includes(badge.id) && badge.isEarned(stats))
     .map((badge) => badge.id);
+}
+
+/** Mots dont la révision tombe aujourd'hui. */
+export function dueToday(progress: Progress, today = dayKey()): string[] {
+  return dueWordIds(progress.review, today);
 }

@@ -98,3 +98,18 @@
 .dimmed {
   opacity: 0.45;
 }
+
+/* Le trou à combler dans une question de conjugaison. */
+.blank {
+  color: var(--blue);
+  letter-spacing: 1px;
+}
+
+.infinitive {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--font-nunito), sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}

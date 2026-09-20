@@ -1,15 +1,14 @@
 import type { Unit } from '@/types/lesson';
 
 /**
- * Tout le contenu pédagogique du site. Les identifiants sont figés : la
- * progression enregistrée dans le navigateur s'y réfère, donc on peut ajouter
- * des unités ou des mots, mais renommer un `id` efface les étoiles déjà
- * gagnées sur la leçon concernée.
+ * Premier chapitre : les mots qu'on emploie dès la première minute en Italie.
  *
  * `say` est une prononciation « à la française », volontairement approximative :
  * elle sert de béquille à une enfant qui ne lit pas l'alphabet phonétique.
+ * Les identifiants sont figés — la progression enregistrée dans le navigateur
+ * s'y réfère, donc on ajoute, mais on ne renomme pas.
  */
-export const units: Unit[] = [
+export const premiersMots: Unit[] = [
   {
     id: 'saluti',
     title: 'Ciao !',
@@ -476,18 +475,3 @@ export const units: Unit[] = [
     ],
   },
 ];
-
-/** Toutes les leçons du parcours, dans l'ordre de déblocage. */
-export const allLessons = units.flatMap((unit) =>
-  unit.lessons.map((lesson) => ({ ...lesson, unit })),
-);
-
-export const allWords = allLessons.flatMap((lesson) => lesson.words);
-
-export function findLesson(lessonId: string) {
-  return allLessons.find((lesson) => lesson.id === lessonId);
-}
-
-export function findWord(wordId: string) {
-  return allWords.find((word) => word.id === wordId);
-}

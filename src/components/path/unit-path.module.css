@@ -1,7 +1,7 @@
 .path {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 12px;
 }
 
 .unit {
@@ -12,11 +12,24 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  width: 100%;
   padding: 12px 14px;
+  border: none;
   border-radius: 18px;
   background: var(--unit-color);
   color: #fff;
   box-shadow: var(--shadow);
+  text-align: left;
+}
+
+.unitText {
+  flex: 1;
+  min-width: 0;
+}
+
+.chevron {
+  font-size: 1.1rem;
+  opacity: 0.85;
 }
 
 .unitEmoji {
@@ -24,18 +37,21 @@
 }
 
 .unitTitle {
+  display: block;
+  font-family: var(--font-baloo), sans-serif;
+  font-weight: 700;
   font-size: 1.1rem;
   line-height: 1.2;
 }
 
 .unitSubtitle {
+  display: block;
   font-size: 0.8rem;
   font-weight: 600;
   opacity: 0.9;
 }
 
 .unitCount {
-  margin-left: auto;
   padding: 4px 10px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.28);

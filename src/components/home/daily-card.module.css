@@ -1,0 +1,50 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding: 18px;
+  border-radius: 22px;
+  background: linear-gradient(140deg, #ffffff, #f3fbf6);
+  border: 2px solid var(--card-border);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+}
+
+.title {
+  font-size: 1.3rem;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.secondaryLink,
+.secondary {
+  padding: 4px;
+  border: none;
+  background: none;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--blue);
+  text-decoration: underline;
+}
+
+/* Fin de séance : fond plus calme, on invite à poser le téléphone. */
+.done {
+  background: linear-gradient(140deg, #eef1ff, #f7f2ff);
+}
+
+.moon {
+  font-size: 2.6rem;
+}

@@ -1,12 +1,12 @@
 import { TopBar } from '@/components/layout/top-bar';
-import { ContinueCard } from '@/components/path/continue-card';
+import { DailyCard } from '@/components/home/daily-card';
 import { UnitPath } from '@/components/path/unit-path';
 
 export default function HomePage() {
   return (
     <main className="page">
       <TopBar />
-      <ContinueCard />
+      <DailyCard />
       <UnitPath />
     </main>
   );

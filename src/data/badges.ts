@@ -6,6 +6,8 @@ export interface BadgeStats {
   perfectLessons: number;
   wordsLearned: number;
   unitsDone: number;
+  /** Mots revus juste plusieurs fois d'affilée, donc vraiment sus. */
+  masteredWords: number;
 }
 
 export interface Badge {
@@ -96,11 +98,60 @@ export const badges: Badge[] = [
     isEarned: (stats) => stats.xp >= 1000,
   },
   {
+    id: 'duecento-parole',
+    label: '200 parole',
+    emoji: '📖',
+    hint: 'Apprends 200 mots',
+    isEarned: (stats) => stats.wordsLearned >= 200,
+  },
+  {
+    id: 'cinquecento-parole',
+    label: '500 parole',
+    emoji: '🗂️',
+    hint: 'Apprends 500 mots',
+    isEarned: (stats) => stats.wordsLearned >= 500,
+  },
+  {
+    id: 'memoria',
+    label: 'Mémoire d’or',
+    emoji: '🧲',
+    hint: 'Aie 100 mots bien ancrés en mémoire',
+    isEarned: (stats) => stats.masteredWords >= 100,
+  },
+  {
+    id: 'serie-30',
+    label: 'Série de 30',
+    emoji: '🌟',
+    hint: 'Joue 30 jours de suite',
+    isEarned: (stats) => stats.streak >= 30,
+  },
+  {
+    id: 'cinquemila-xp',
+    label: '5000 XP',
+    emoji: '🛸',
+    hint: 'Atteins 5000 XP',
+    isEarned: (stats) => stats.xp >= 5000,
+  },
+  {
+    id: 'dieci-unita',
+    label: '10 unités',
+    emoji: '🗺️',
+    hint: 'Termine 10 unités',
+    isEarned: (stats) => stats.unitsDone >= 10,
+  },
+  {
+    id: 'venti-unita',
+    label: '20 unités',
+    emoji: '🧭',
+    hint: 'Termine 20 unités',
+    isEarned: (stats) => stats.unitsDone >= 20,
+  },
+  {
     id: 'maestra',
     label: 'Maestra',
     emoji: '👑',
     hint: 'Termine toutes les unités du parcours',
-    isEarned: (stats) => stats.unitsDone >= 7,
+    isEarned: (stats) => stats.unitsDone >= 30,
   },
 ];
 

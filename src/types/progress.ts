@@ -6,6 +6,19 @@ export interface LessonResult {
   attempts: number;
 }
 
+/**
+ * Fiche de révision d'un mot, façon « boîtes de Leitner » : chaque réussite
+ * fait monter d'une boîte et repousse la prochaine rencontre, chaque erreur
+ * ramène le mot à la première boîte. C'est ce qui étale le contenu dans le
+ * temps et fait revenir les mots avant qu'ils ne soient oubliés.
+ */
+export interface ReviewCard {
+  /** 0 (tout frais ou raté) à 6 (su par cœur). */
+  box: number;
+  /** Jour de la prochaine révision, au format `AAAA-MM-JJ`. */
+  due: string;
+}
+
 export interface Progress {
   /** Prénom choisi au premier lancement, `null` tant qu'il n'est pas saisi. */
   name: string | null;
@@ -14,12 +27,15 @@ export interface Progress {
   streak: number;
   /** Dernier jour d'activité, au format `AAAA-MM-JJ` (heure locale). */
   lastDay: string | null;
-  /** XP gagnés pendant `lastDay`, pour l'objectif quotidien. */
+  /** XP gagnés pendant `lastDay`. */
   xpToday: number;
+  /** Secondes de jeu effectives pendant `lastDay` : la séance du jour s'arrête
+   *  dessus, pas sur un nombre d'exercices. */
+  secondsToday: number;
   /** Résultats par identifiant de leçon. */
   lessons: Record<string, LessonResult>;
-  /** Mots ratés au moins une fois et pas encore redressés, par identifiant. */
-  toReview: string[];
+  /** Fiche de révision par identifiant de mot. */
+  review: Record<string, ReviewCard>;
   /** Identifiants des badges déjà décrochés. */
   badges: string[];
 }

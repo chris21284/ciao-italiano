@@ -2,9 +2,6 @@
 export const XP_PER_CORRECT = 10;
 /** Bonus versé quand la leçon est terminée sans aucune faute. */
 export const XP_PERFECT_BONUS = 20;
-/** Objectif du jour : deux leçons propres suffisent à le remplir. */
-export const DAILY_GOAL_XP = 100;
-
 const LEVEL_TITLES = [
   'Curieuse',
   'Apprentie',

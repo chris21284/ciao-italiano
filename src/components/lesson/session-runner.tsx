@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import type { Exercise } from '@/lib/exercise-builder';
 import { speakItalian } from '@/lib/speak';
@@ -13,7 +13,15 @@ export interface SessionResult {
   rightWordIds: string[];
   /** Mots ratés au moins une fois. */
   wrongWordIds: string[];
+  /** Temps réellement passé à répondre, pour la séance du jour. */
+  seconds: number;
 }
+
+/**
+ * Au-delà, on considère que le téléphone a été posé : une question laissée à
+ * l'écran pendant le goûter ne doit pas remplir l'objectif de la journée.
+ */
+const MAX_MS_PER_QUESTION = 45_000;
 
 interface SessionRunnerProps {
   exercises: Exercise[];
@@ -26,7 +34,9 @@ interface SessionRunnerProps {
 }
 
 function expectedAnswer(exercise: Exercise): string {
-  return exercise.kind === 'choice-it-fr' ? exercise.word.fr : exercise.word.it;
+  if (exercise.kind === 'choice-it-fr') return exercise.word.fr;
+  if (exercise.kind === 'conjugate') return exercise.word.verb?.form ?? exercise.word.it;
+  return exercise.word.it;
 }
 
 function isRight(exercise: Exercise, value: string): boolean {
@@ -47,6 +57,15 @@ export function SessionRunner({
   const [wrongWordIds, setWrongWordIds] = useState<string[]>([]);
   const [heartsLeft, setHeartsLeft] = useState(hearts ?? 0);
   const [failed, setFailed] = useState(false);
+
+  // Le chronomètre vit dans des refs : il ne déclenche aucun rendu, et il
+  // compte question par question plutôt que du début à la fin de l'écran.
+  const questionStartedAt = useRef<number | null>(null);
+  const elapsedMsRef = useRef(0);
+
+  useEffect(() => {
+    questionStartedAt.current = Date.now();
+  }, []);
 
   const exercise = queue[index];
 
@@ -71,6 +90,8 @@ export function SessionRunner({
               setWrongWordIds([]);
               setHeartsLeft(hearts ?? 0);
               setFailed(false);
+              elapsedMsRef.current = 0;
+              questionStartedAt.current = Date.now();
               onRestart();
             }}
           >
@@ -88,6 +109,12 @@ export function SessionRunner({
 
   function handleAnswer(value: string) {
     if (answer !== null || !exercise) return;
+
+    if (questionStartedAt.current !== null) {
+      elapsedMsRef.current += Math.min(Date.now() - questionStartedAt.current, MAX_MS_PER_QUESTION);
+      questionStartedAt.current = null;
+    }
+
     const right = isRight(exercise, value);
     setAnswer(value);
     setCorrect(right);
@@ -116,12 +143,14 @@ export function SessionRunner({
     const nextIndex = index + 1;
     setQueue(nextQueue);
     setAnswer(null);
+    questionStartedAt.current = Date.now();
 
     if (nextIndex >= nextQueue.length) {
       const seenWordIds = [...new Set(exercises.map((item) => item.word.id))];
       onFinish({
         rightWordIds: seenWordIds.filter((wordId) => !wrongWordIds.includes(wordId)),
         wrongWordIds,
+        seconds: Math.round(elapsedMsRef.current / 1000),
       });
       return;
     }

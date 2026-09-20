@@ -3,7 +3,8 @@
 import { useProgress } from '@/hooks/use-progress';
 import { useMounted } from '@/hooks/use-mounted';
 import { currentStreak, dayKey } from '@/lib/day';
-import { DAILY_GOAL_XP, levelProgress } from '@/lib/xp';
+import { levelProgress } from '@/lib/xp';
+import { dailyRatio, minutesFromSeconds } from '@/lib/daily';
 import { ProgressRing } from '@/components/ui/progress-ring';
 import styles from './top-bar.module.css';
 
@@ -13,7 +14,7 @@ export function TopBar() {
   const mounted = useMounted();
   const today = dayKey();
   const streak = mounted ? currentStreak(progress.streak, progress.lastDay, today) : 0;
-  const xpToday = mounted && progress.lastDay === today ? progress.xpToday : 0;
+  const secondsToday = mounted && progress.lastDay === today ? progress.secondsToday : 0;
   const level = levelProgress(mounted ? progress.xp : 0);
 
   return (
@@ -39,10 +40,10 @@ export function TopBar() {
       </div>
 
       <ProgressRing
-        ratio={Math.min(xpToday / DAILY_GOAL_XP, 1)}
-        label={`Objectif du jour : ${xpToday} XP sur ${DAILY_GOAL_XP}`}
+        ratio={dailyRatio(secondsToday)}
+        label={`Séance du jour : ${minutesFromSeconds(secondsToday)} minutes sur 12`}
       >
-        {xpToday >= DAILY_GOAL_XP ? '✅' : `${Math.round((xpToday / DAILY_GOAL_XP) * 100)}%`}
+        {dailyRatio(secondsToday) >= 1 ? '✅' : `${minutesFromSeconds(secondsToday)}′`}
       </ProgressRing>
     </header>
   );

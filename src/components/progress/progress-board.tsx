@@ -5,7 +5,7 @@ import { badges } from '@/data/badges';
 import { allLessons, allWords } from '@/data/units';
 import { useProgress } from '@/hooks/use-progress';
 import { useMounted } from '@/hooks/use-mounted';
-import { computeStats, EMPTY_PROGRESS } from '@/lib/progress-stats';
+import { computeStats, dueToday, EMPTY_PROGRESS } from '@/lib/progress-stats';
 import { resetProgress } from '@/lib/progress-store';
 import { levelProgress } from '@/lib/xp';
 import { NameForm } from '@/components/home/name-form';
@@ -68,6 +68,14 @@ export function ProgressBoard() {
         <li className={styles.stat}>
           <span className={styles.statValue}>⭐ {stats.perfectLessons}</span>
           <span className={styles.statLabel}>leçons parfaites</span>
+        </li>
+        <li className={styles.stat}>
+          <span className={styles.statValue}>🧲 {stats.masteredWords}</span>
+          <span className={styles.statLabel}>mots bien ancrés</span>
+        </li>
+        <li className={styles.stat}>
+          <span className={styles.statValue}>🔁 {dueToday(progress).length}</span>
+          <span className={styles.statLabel}>à revoir aujourd’hui</span>
         </li>
       </ul>
 
