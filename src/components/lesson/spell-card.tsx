@@ -54,14 +54,27 @@ export function SpellCard({ exercise, answered, onAnswer }: SpellCardProps) {
         ))}
       </div>
 
-      <button
-        type="button"
-        className="bigButton"
-        onClick={() => onAnswer(attempt)}
-        disabled={answered || attempt.length === 0}
-      >
-        Vérifier
-      </button>
+      <div className={styles.actions}>
+        {/* Se tromper d'une lettre ne doit pas coûter un cœur : on efface la
+            dernière posée plutôt que de valider par dépit. */}
+        <button
+          type="button"
+          className={styles.undo}
+          onClick={() => setPicked((current) => current.slice(0, -1))}
+          disabled={answered || picked.length === 0}
+          aria-label="Effacer la dernière lettre"
+        >
+          ⌫
+        </button>
+        <button
+          type="button"
+          className="bigButton"
+          onClick={() => onAnswer(attempt)}
+          disabled={answered || attempt.length === 0}
+        >
+          Vérifier
+        </button>
+      </div>
     </div>
   );
 }
