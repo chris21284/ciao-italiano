@@ -5,7 +5,7 @@ import type { Lesson, Unit, Word } from '@/types/lesson';
  * six formes par verbe et le reste (mots, exercices, révisions) en découle.
  * C'est ce qui permet d'ajouter un verbe en six lignes.
  */
-interface VerbForm {
+export interface VerbForm {
   pronoun: string;
   /** La forme seule : « sono » dans « io sono ». */
   form: string;
@@ -13,7 +13,7 @@ interface VerbForm {
   say: string;
 }
 
-interface VerbTable {
+export interface VerbTable {
   id: string;
   infinitive: string;
   fr: string;
@@ -21,7 +21,7 @@ interface VerbTable {
   forms: VerbForm[];
 }
 
-function verbLesson(table: VerbTable): Lesson {
+export function verbLesson(table: VerbTable): Lesson {
   const words: Word[] = table.forms.map((form) => ({
     id: `${table.id}-${form.pronoun}`,
     it: `${form.pronoun} ${form.form}`,

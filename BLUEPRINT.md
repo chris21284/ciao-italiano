@@ -268,7 +268,8 @@ jamais punir un retour en arrière.
 ## 7. Règles de rédaction du contenu
 
 - **6 mots par leçon, 4 leçons par unité** (la première unité peut en avoir 3).
-- Viser **~40 unités / ~160 leçons / ~950 mots** pour trois mois.
+- Viser **~40 unités / ~160 leçons / ~950 mots** pour trois mois, et
+  **~55 unités / ~210 leçons / ~1250 mots** pour couvrir un niveau A1 complet.
 - Chaque mot : article inclus (`il gatto`, pas `gatto`), emoji parlant,
   prononciation à la française (`il gat-to`), traduction naturelle.
 - Progression thématique du proche au lointain : salutations, couleurs,
@@ -279,6 +280,13 @@ jamais punir un retour en arrière.
   composé, futur).
 - Des **phrases entières** dès le début (« ho fame », « che bello! ») : ce sont
   elles qui donnent l'impression de parler.
+- Pour viser un **niveau A1**, le vocabulaire ne suffit pas : il faut un
+  chapitre de grammaire (articles, pluriels, accord des adjectifs, possessifs,
+  prépositions simples et articulées, « il y a », négation, le verbe _piacere_,
+  l'impératif, le présent progressif) et de petits dialogues (commander,
+  présenter quelqu'un, demander de l'aide, téléphoner).
+- Une règle de grammaire s'enseigne **dans une phrase concrète**, jamais en
+  mot nu : « nel bosco » plutôt que « nel ».
 - Un **test de contenu** garde le fichier honnête : aucun identifiant en
   double, six mots par leçon, tous les champs remplis, cohérence des formes
   conjuguées. C'est le test le plus utile du projet.

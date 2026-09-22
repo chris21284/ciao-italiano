@@ -11,9 +11,9 @@ describe('contenu du parcours', () => {
   it('tient au moins trois mois de séances quotidiennes', () => {
     // Deux à trois leçons par jour au début, moins ensuite quand les
     // révisions prennent leur place : il en faut de quoi tenir ~90 jours.
-    expect(units.length).toBeGreaterThanOrEqual(40);
-    expect(allLessons.length).toBeGreaterThanOrEqual(155);
-    expect(allWords.length).toBeGreaterThanOrEqual(950);
+    expect(units.length).toBeGreaterThanOrEqual(50);
+    expect(allLessons.length).toBeGreaterThanOrEqual(200);
+    expect(allWords.length).toBeGreaterThanOrEqual(1200);
   });
 
   it('n’a aucun identifiant de mot en double', () => {
@@ -26,6 +26,19 @@ describe('contenu du parcours', () => {
     const unitIds = units.map((unit) => unit.id);
     expect([...new Set(lessonIds)]).toHaveLength(lessonIds.length);
     expect([...new Set(unitIds)]).toHaveLength(unitIds.length);
+  });
+
+  it('n’enseigne jamais deux fois la même expression italienne', () => {
+    // Deux entrées identiques, ce sont deux fiches de révision pour un seul
+    // mot : elle le reverrait deux fois plus souvent, sans raison.
+    const seen = new Map<string, string>();
+    const doubles: string[] = [];
+    for (const word of allWords) {
+      const previous = seen.get(word.it);
+      if (previous) doubles.push(`${word.it} (${previous} / ${word.id})`);
+      else seen.set(word.it, word.id);
+    }
+    expect(doubles).toEqual([]);
   });
 
   it('donne six mots à chaque leçon', () => {

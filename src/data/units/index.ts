@@ -7,6 +7,9 @@ import { motsPourDire } from './mots-pour-dire';
 import { ecoleEtMetiers } from './ecole-et-metiers';
 import { vitaItaliana } from './vita-italiana';
 import { verbUnits } from './verbes';
+import { grammaticaBase } from './grammatica-1';
+import { grammaticaFrasi } from './grammatica-2';
+import { grammaticaParlare } from './grammatica-3';
 
 /**
  * Le parcours complet, dans l'ordre de déblocage. Il est découpé en fichiers
@@ -23,6 +26,9 @@ export const units: Unit[] = [
   ...ecoleEtMetiers,
   ...vitaItaliana,
   ...verbUnits,
+  ...grammaticaBase,
+  ...grammaticaFrasi,
+  ...grammaticaParlare,
 ];
 
 /** Toutes les leçons du parcours, dans l'ordre, chacune sachant son unité. */
