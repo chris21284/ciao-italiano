@@ -15,6 +15,8 @@ export const EMPTY_PROGRESS: Progress = {
   lessons: {},
   review: {},
   badges: [],
+  soundChecked: false,
+  soundEnabled: true,
 };
 
 export function isLessonDone(progress: Progress, lessonId: string): boolean {

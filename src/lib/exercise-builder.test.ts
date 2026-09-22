@@ -103,3 +103,25 @@ describe('exercices de conjugaison', () => {
     }
   });
 });
+
+describe('séance sans le son', () => {
+  const lessonWords = findLesson('colori-1')?.words ?? [];
+
+  it('remplace les questions d’écoute par des questions lues', () => {
+    for (const seed of [1, 2, 3, 7, 42]) {
+      const exercises = buildLessonExercises(lessonWords, allWords, seed, false);
+      expect(exercises.some((exercise) => exercise.kind === 'listen')).toBe(false);
+      expect(exercises).toHaveLength(lessonWords.length);
+    }
+  });
+
+  it('les garde quand le son fonctionne', () => {
+    const exercises = buildLessonExercises(lessonWords, allWords, 3, true);
+    expect(exercises.some((exercise) => exercise.kind === 'listen')).toBe(true);
+  });
+
+  it('vaut aussi pour la révision', () => {
+    const exercises = buildReviewExercises(allWords.slice(0, 4), allWords, 5, 10, false);
+    expect(exercises.some((exercise) => exercise.kind === 'listen')).toBe(false);
+  });
+});

@@ -199,6 +199,15 @@ export function setPlayerName(name: string) {
   commit({ ...state, name: trimmed.length > 0 ? trimmed : null });
 }
 
+/**
+ * Réponse au test de son. `enabled: false` remplace les questions d'écoute par
+ * des questions lues — mieux vaut une leçon sans son qu'une leçon ratée parce
+ * que le téléphone était en silencieux.
+ */
+export function setSoundEnabled(enabled: boolean) {
+  commit({ ...state, soundChecked: true, soundEnabled: enabled });
+}
+
 export function resetProgress() {
   commit(EMPTY_PROGRESS);
 }

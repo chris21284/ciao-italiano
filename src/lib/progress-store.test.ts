@@ -5,6 +5,7 @@ import {
   recordReview,
   resetProgress,
   setPlayerName,
+  setSoundEnabled,
 } from './progress-store';
 import { XP_PER_CORRECT, XP_PERFECT_BONUS } from './xp';
 import { dayKey } from './day';
@@ -151,5 +152,19 @@ describe('setPlayerName', () => {
     setPlayerName('Lucie');
     completeLesson({ lessonId: 'saluti-1', rightWordIds: ['ciao'], wrongWordIds: [], seconds: 60 });
     expect(getSnapshot().name).toBe('Lucie');
+  });
+});
+
+describe('setSoundEnabled', () => {
+  it('retient qu’elle n’entend rien, pour ne plus poser la question', () => {
+    setSoundEnabled(false);
+    expect(getSnapshot().soundChecked).toBe(true);
+    expect(getSnapshot().soundEnabled).toBe(false);
+  });
+
+  it('se rallume depuis la page des progrès', () => {
+    setSoundEnabled(false);
+    setSoundEnabled(true);
+    expect(getSnapshot().soundEnabled).toBe(true);
   });
 });

@@ -7,7 +7,10 @@ import { buildReviewExercises } from '@/lib/exercise-builder';
 import { getSnapshot, recordReview } from '@/lib/progress-store';
 import { dueToday, learnedWordIds } from '@/lib/progress-stats';
 import { useSessionSeed } from '@/hooks/use-session-seed';
+import { useProgress } from '@/hooks/use-progress';
+import { renewSeed } from '@/lib/session-seed';
 import { SessionRunner, type SessionResult } from './session-runner';
+import { SoundCheck } from './sound-check';
 import styles from './review-screen.module.css';
 
 /**
@@ -16,6 +19,7 @@ import styles from './review-screen.module.css';
  */
 export function ReviewScreen() {
   const seed = useSessionSeed();
+  const settings = useProgress();
   const [xpGained, setXpGained] = useState<number | null>(null);
 
   const exercises = useMemo(() => {
@@ -33,8 +37,14 @@ export function ReviewScreen() {
     // révisions se sont accumulées.
     const size = Math.min(Math.max(due.length, 10), 20);
     // Sans leçon terminée, on révise quand même sur les tout premiers mots.
-    return buildReviewExercises(due, seen.length > 0 ? seen : allWords.slice(0, 12), seed, size);
-  }, [seed]);
+    return buildReviewExercises(
+      due,
+      seen.length > 0 ? seen : allWords.slice(0, 12),
+      seed,
+      size,
+      settings.soundEnabled,
+    );
+  }, [seed, settings.soundEnabled]);
 
   function handleFinish(result: SessionResult) {
     const { xpGained: gained } = recordReview(result);
@@ -58,6 +68,10 @@ export function ReviewScreen() {
 
   if (exercises.length === 0) {
     return <p className={styles.loading}>On prépare la révision...</p>;
+  }
+
+  if (!settings.soundChecked && exercises.some((exercise) => exercise.kind === 'listen')) {
+    return <SoundCheck onDone={renewSeed} />;
   }
 
   return (

@@ -38,4 +38,11 @@ export interface Progress {
   review: Record<string, ReviewCard>;
   /** Identifiants des badges déjà décrochés. */
   badges: string[];
+  /**
+   * Aucune API web ne dit si le téléphone est en mode silencieux : on le lui
+   * demande une fois, au premier exercice d'écoute, et on retient sa réponse.
+   */
+  soundChecked: boolean;
+  /** `false` : les questions d'écoute sont remplacées par des questions lues. */
+  soundEnabled: boolean;
 }

@@ -6,7 +6,7 @@ import { allLessons, allWords } from '@/data/units';
 import { useProgress } from '@/hooks/use-progress';
 import { useMounted } from '@/hooks/use-mounted';
 import { computeStats, dueToday, EMPTY_PROGRESS } from '@/lib/progress-stats';
-import { resetProgress } from '@/lib/progress-store';
+import { resetProgress, setSoundEnabled } from '@/lib/progress-store';
 import { levelProgress } from '@/lib/xp';
 import { NameForm } from '@/components/home/name-form';
 import styles from './progress-board.module.css';
@@ -96,6 +96,16 @@ export function ProgressBoard() {
           );
         })}
       </ul>
+
+      <button
+        type="button"
+        className={styles.rename}
+        onClick={() => setSoundEnabled(!progress.soundEnabled)}
+      >
+        {progress.soundEnabled
+          ? 'Désactiver les questions d’écoute'
+          : 'Réactiver les questions d’écoute'}
+      </button>
 
       <button
         type="button"

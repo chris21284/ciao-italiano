@@ -380,6 +380,11 @@ Environnement : `jsdom` **plus un `localStorage` minimal dans
 - **Le contenu se consomme dix fois plus vite qu'on ne le croit** : sans
   répétition espacée ni limite de séance, trois mois de vocabulaire tiennent en
   une semaine.
+- **Aucune API web ne dit si le téléphone est en mode silencieux**, ni quel est
+  le volume : le bouton latéral de l'iPhone est invisible depuis une page, et
+  analyser le son produit ne sert à rien puisque la mesure se fait avant la
+  sortie matérielle. La seule réponse honnête est de poser la question une fois
+  (« tu entends ? »), de retenir la réponse, et de savoir se passer du son.
 
 ---
 

@@ -83,10 +83,17 @@ function buildOne(
   index: number,
   pool: readonly Word[],
   random: () => number,
+  listening: boolean,
 ): Exercise {
   const rotation = index % 4;
   if (rotation === 0) return buildChoice('choice-it-fr', word, pool, random);
-  if (rotation === 2) return buildChoice('listen', word, pool, random);
+  // Sans le son, la question d'écoute devient une question lue : elle garde sa
+  // place dans la rotation plutôt que de disparaître.
+  if (rotation === 2) {
+    return listening
+      ? buildChoice('listen', word, pool, random)
+      : buildChoice('choice-it-fr', word, pool, random);
+  }
   // Les formes conjuguées passent par l'exercice de conjugaison plutôt que par
   // les lettres mélangées, qui n'apprendraient rien de la terminaison.
   if (word.verb) return buildConjugate(word, pool, random);
@@ -105,9 +112,12 @@ export function buildLessonExercises(
   words: readonly Word[],
   pool: readonly Word[],
   seed: number,
+  listening = true,
 ): Exercise[] {
   const random = createRandom(seed);
-  return shuffle(words, random).map((word, index) => buildOne(word, index, pool, random));
+  return shuffle(words, random).map((word, index) =>
+    buildOne(word, index, pool, random, listening),
+  );
 }
 
 /**
@@ -119,6 +129,7 @@ export function buildReviewExercises(
   seen: readonly Word[],
   seed: number,
   size = 10,
+  listening = true,
 ): Exercise[] {
   const random = createRandom(seed);
   const filler = shuffle(
@@ -127,6 +138,6 @@ export function buildReviewExercises(
   );
   const selected = [...shuffle(toReview, random), ...filler].slice(0, size);
   return selected.map((word, index) =>
-    buildOne(word, index, seen.length ? seen : selected, random),
+    buildOne(word, index, seen.length ? seen : selected, random, listening),
   );
 }

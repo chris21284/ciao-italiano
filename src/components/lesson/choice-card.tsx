@@ -52,14 +52,21 @@ export function ChoiceCard({ exercise, answer, onAnswer }: ChoiceCardProps) {
           </span>
         </div>
       ) : isListening ? (
-        <button
-          type="button"
-          className={styles.speaker}
-          onClick={() => speakItalian(exercise.word.it)}
-        >
-          <span aria-hidden="true">🔊</span>
-          <span className={styles.speakerLabel}>Réécouter</span>
-        </button>
+        <div className={styles.listen}>
+          <button
+            type="button"
+            className={styles.speaker}
+            onClick={() => speakItalian(exercise.word.it)}
+          >
+            <span aria-hidden="true">🔊</span>
+            <span className={styles.speakerLabel}>Réécouter</span>
+          </button>
+          {/* Le navigateur ne peut pas savoir si le téléphone est en
+              silencieux : ce rappel est tout ce qu'on peut faire. */}
+          <p className={styles.mutedHint}>
+            Tu n’entends rien ? Vérifie le volume et le bouton silencieux.
+          </p>
+        </div>
       ) : (
         <div className={styles.prompt}>
           <span className={styles.promptEmoji} aria-hidden="true">

@@ -62,7 +62,10 @@ ne pas entrer en conflit avec le Citron Pressé sur le 3000).
   d'envie.
 - **La voix est celle du téléphone.** La prononciation passe par la synthèse
   vocale du navigateur en `it-IT` (`src/lib/speak.ts`) : aucun fichier audio à
-  héberger.
+  héberger. Aucune API ne permettant de savoir si le téléphone est en mode
+  silencieux, un test de son est proposé avant la première question d'écoute ;
+  répondre « je n'entends rien » remplace ces questions par des questions
+  lues, et le réglage se retrouve dans la page Progrès.
 
 ## La gamification
 
